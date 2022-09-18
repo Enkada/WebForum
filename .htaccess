@@ -1,0 +1,5 @@
+AddDefaultCharset utf-8
+ErrorDocument 404  /404.html
+
+php_value upload_max_filesize 40M
+php_value post_max_size 42M

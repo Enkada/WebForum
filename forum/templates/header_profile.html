@@ -1,0 +1,5 @@
+<div class="forum-header__profile">
+    <a class="forum-header__profile__photo" href="/profile/?id=<?= $_SESSION['id'] ?>"><img src="/profile/avatar/<?= $_SESSION['photo'] ?>" class="avatar"></a>
+    <div class="forum-header__profile__name"><a href="/profile/?id=<?= $_SESSION['id'] ?>"><?= $_SESSION['display_name'] ?></a></div>
+    <div class="forum-header__profile__settings"><a href="/edit">Настройки</a></div>
+</div>
