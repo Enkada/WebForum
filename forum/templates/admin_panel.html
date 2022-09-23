@@ -6,7 +6,12 @@
 </form>
 <h2>Пользователи</h2>
 <table id="user-list" class="sortable">
-    <tr><th>ID<span id="sorttable_sortfwdind">&nbsp;▾</span></th><th>Логин</th><th>Email</th><th>Статус активации</th></tr>
+    <tr>
+        <th>ID<span id="sorttable_sortfwdind">&nbsp;▾</span></th>
+        <th>Логин</th>
+        <th>Email</th>
+        <th>Инструменты</th>
+    </tr>
 </table>
 <div id="users-service" data-users="<?= htmlspecialchars(json_encode($_USERS_DATA)) ?>"></div>
 <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js" defer></script>

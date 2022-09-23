@@ -122,8 +122,10 @@ function edit() {
                     mysqli_real_escape_string($connection, $_SESSION['id'])
                 ); 
 
-                if (mysqli_query($connection, $query)) { 
-                    unlink($_SERVER['DOCUMENT_ROOT']."/profile/avatar/".$_SESSION['photo']);
+                if (mysqli_query($connection, $query)) {
+                    $previous_photo = $_SERVER['DOCUMENT_ROOT']."/profile/avatar/".$_SESSION['photo'];
+                    if ($previous_photo != "default.jpg" && file_exists($previous_photo)) 
+                        unlink($previous_photo);
                     $_SESSION['photo'] = $file;
                     header('Location: '.$_SERVER['HTTP_REFERER']);
                 }
@@ -139,7 +141,7 @@ function profile() {
     if ($_GET['id'] != '') {
         include $_SERVER['DOCUMENT_ROOT']."/forum/connection.php";
         
-        $user = mysqli_fetch_assoc(mysqli_query($connection, sprintf("SELECT display_name, id, photo FROM users WHERE id = '%s'", 
+        $user = mysqli_fetch_assoc(mysqli_query($connection, sprintf("SELECT display_name, id, photo, (SELECT COUNT(*) FROM messages WHERE messages.user = users.id) as messages FROM users WHERE id = '%s'", 
             mysqli_real_escape_string($connection, $_GET['id'])
         )));
     

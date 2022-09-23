@@ -44,6 +44,21 @@ function showModalForm(action, extra = null) {
     modal_content.appendChild(h2);
 
     switch (action) {
+        case 'edit_mod':
+            h2.innerHTML = "Модерируемые разделы";
+
+            var selectSection = document.createElement('select');
+            selectSection.name = "section";
+            selectSection.title = "Раздел";
+            extra.sections.forEach(s => {
+                var optionSection = document.createElement('option');
+                optionSection.value = s.id;
+                optionSection.innerHTML = s.name;
+                selectSection.appendChild(optionSection);
+            });
+            //selectSection.value = extra.section.category;
+            form.appendChild(selectSection);
+            break;
         case 'delete_category':
             h2.innerHTML = "Удаление категории";
 
