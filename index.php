@@ -1,8 +1,8 @@
 <?php 
-require $_SERVER['DOCUMENT_ROOT']."/forum/functions.php";
+require "core/functions.php";
 
 $_TITLE = "Форум";
-$_CONTENT = template($_SERVER['DOCUMENT_ROOT'].'/forum/templates/forum_list.html');
+$_CONTENT = template('core/includes/forum_list.html');
 
-include $_SERVER['DOCUMENT_ROOT']."/forum/templates/main.html";
+include "core/template.html";
 ?>

@@ -1,0 +1,47 @@
+<?php session_start(); ?>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?=$_TITLE?></title>
+    <link rel="stylesheet" href="<?=$_PATH?>core/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <header class="forum-header">
+        <img class="forum-header__image" src="<?=$_PATH?>core/forum.jpg" alt="">
+        <div class="forum-header__title">
+            <a href="<?=$_PATH?>" class="forum-header__title--main">Мой форум</a>
+            <div class="forum-header__title--sub">Мой первый веб-форум</div>
+        </div>
+        <nav class="forum-header__navigation">
+            <ul>            
+                <? if ($_SESSION['user'] != ''): ?>
+                    <li><a href="<?=$_PATH?>core/logout.php" class="btn-material-icon"><span class="material-icons">logout</span><span>Выход</span></a></li>
+                <? else: ?>
+                    <li><a href="<?=$_PATH?>login.php" class="btn-material-icon"><span class="material-icons">login</span><span>Войти</span></a></li>
+                <? endif; ?>
+    
+                <? if ($_SESSION['role'] == 'admin'): ?>
+                    <li><a href="<?=$_PATH?>core/admin/" class="btn-material-icon editor"><span class="material-icons">admin_panel_settings</span><span>Администрирование</span></a></li>
+                <? endif; ?>
+            </ul>
+        </nav>
+        <? if ($_SESSION['user'] != ''): ?>
+            <div class="forum-header__profile">
+                <a class="forum-header__profile__photo" href="<?=$_PATH?>profile/?id=<?= $_SESSION['id'] ?>"><img src="<?=$_PATH?>profile/avatar/<?= $_SESSION['photo'] ?>" class="avatar"></a>
+                <div class="forum-header__profile__name"><a href="<?=$_PATH?>profile/?id=<?= $_SESSION['id'] ?>"><?= $_SESSION['display_name'] ?></a></div>
+                <div class="forum-header__profile__settings"><a href="<?=$_PATH?>edit">Настройки</a></div>
+            </div>
+        <? endif; ?>
+    </header>
+    <main class="forum-main <?=$_MAIN_CLASS?>"><?=$_CONTENT?></main>
+    <footer class="forum-footer"></footer>
+    <div id="id-service" data-id="<?= $_SESSION['id'] ?>"></div>
+    <div id="path-service" data-path="<?= $_PATH ?>"></div>
+    <div id="role-service" data-role="<?= $_SESSION['role'] ?>"></div>
+    <?php include $_SERVER['DOCUMENT_ROOT'].$_PATH."core/includes/modal.php" ?>
+</body>
+</html>

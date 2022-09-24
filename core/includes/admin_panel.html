@@ -1,0 +1,18 @@
+<h2>Настройки форума</h2>
+<form method="POST" class="settings-form">
+    <label for="title">Название блога</label>
+    <input type="text" name="blog_title" value="" required>
+    <button type="submit">Сохранить изменения</button>
+</form>
+<h2>Пользователи</h2>
+<table id="user-list" class="sortable">
+    <tr>
+        <th>ID<span id="sorttable_sortfwdind">&nbsp;▾</span></th>
+        <th>Логин</th>
+        <th>Email</th>
+        <th>Инструменты</th>
+    </tr>
+</table>
+<div id="users-service" data-users="<?= htmlspecialchars(json_encode($_USERS_DATA)) ?>"></div>
+<script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js" defer></script>
+<script src="<?=_PATH?>js/forum_settings.js" defer></script>
