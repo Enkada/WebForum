@@ -1,4 +1,7 @@
 <?php 
+if (!file_exists("core/connection.php"))
+    header('Location: core/install');
+
 require "core/functions.php";
 
 $_TITLE = "Форум";

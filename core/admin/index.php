@@ -6,6 +6,7 @@ $data = get_users_data();
 $_TITLE = "Панель администратора";
 $_CONTENT = template('../includes/admin_panel.html', array(
     "_USERS_DATA" => $data,
+    "_SETTINGS" => $_SETTINGS,
 ));
 
 include "../template.html";

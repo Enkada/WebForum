@@ -1,7 +1,7 @@
 <h2>Настройки форума</h2>
-<form method="POST" class="settings-form">
-    <label for="title">Название блога</label>
-    <input type="text" name="blog_title" value="" required>
+<form action="../actions/post/edit_settings.php" method="POST" class="settings-form">
+    <label for="title">Название форума</label>
+    <input type="text" name="forum_title" value="<?=$_SETTINGS["forum_title"]?>" required>
     <button type="submit">Сохранить изменения</button>
 </form>
 <h2>Пользователи</h2>

@@ -1,8 +1,13 @@
 <?php 
 session_start();
-$_PATH = "/community/";
+
+// THIS VARIABLE IS EDITED BY SCRIPT
+$_PATH = "/forum/"; // DO NOT CHANGE MANUALLY
+
 define( '_PATH', $_PATH );
 define( '_CONNECTION_PATH', $_SERVER['DOCUMENT_ROOT'].$_PATH."core/connection.php" );
+
+load_settings();
 
 function template() {
     if (func_num_args() > 1) 
@@ -17,6 +22,21 @@ function template() {
     }
 
     return ob_get_clean();
+}
+
+function load_settings() {
+    include _CONNECTION_PATH;
+
+    global $_SETTINGS;
+    $_SETTINGS = array();
+    $result = mysqli_query($connection, "SELECT * FROM settings");
+
+    while ($row = mysqli_fetch_assoc($result)) {
+        $_SETTINGS[$row['name']] = $row['value'];
+    }
+
+    mysqli_free_result($result);
+    mysqli_close($connection);
 }
 
 function login() {
@@ -107,7 +127,7 @@ function section() {
 
 function edit() {
     if ($_SESSION['user'] == '') 
-    header('Location: http://'.$_SERVER['HTTP_HOST']._PATH);
+        header('Location: http://'.$_SERVER['HTTP_HOST']._PATH);
 
     if (!empty($_FILES)) {
         include _CONNECTION_PATH;
@@ -116,7 +136,7 @@ function edit() {
         if ($photo['error'] == 0) {   
             $file = base_convert (time(), 10, 36).'.jpg';
 
-            if (!move_uploaded_file($photo['tmp_name'], $_SERVER['DOCUMENT_ROOT']."/profile/avatar/$file")) { 
+            if (!move_uploaded_file($photo['tmp_name'], $_SERVER['DOCUMENT_ROOT']._PATH."profile/avatar/$file")) { 
                 //$modal_message = json_encode(array("title" => "Ошибка", "text" => "Не удалось загрузить изображение!"));
             }
             else {         
@@ -126,7 +146,7 @@ function edit() {
                 ); 
 
                 if (mysqli_query($connection, $query)) {
-                    $previous_photo = $_SERVER['DOCUMENT_ROOT']."/profile/avatar/".$_SESSION['photo'];
+                    $previous_photo = $_SERVER['DOCUMENT_ROOT']._PATH."profile/avatar/".$_SESSION['photo'];
                     if ($previous_photo != "default.jpg" && file_exists($previous_photo)) 
                         unlink($previous_photo);
                     $_SESSION['photo'] = $file;

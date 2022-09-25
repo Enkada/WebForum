@@ -1,1 +1,1 @@
-<?php $connection = mysqli_connect('127.0.0.1', 'root', '', 'my_forum'); ?>
+<?php $connection = mysqli_connect('127.0.0.1', 'root', '', 'enkada_forum'); ?>

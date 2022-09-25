@@ -1,3 +1,4 @@
 .vscode
-*.png
-*.jpg
+profile/avatar/*.png
+profile/avatar/*.jpg
+connection.php
