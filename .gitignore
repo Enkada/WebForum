@@ -1,4 +1,5 @@
 .vscode
 profile/avatar/*.png
 profile/avatar/*.jpg
+!profile/avatar/default.jpg
 core/connection.php

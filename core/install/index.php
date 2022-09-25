@@ -59,7 +59,7 @@ if (!empty($_POST)) {
             preg_replace('/\$_PATH = \".*\"; \/\/ DO NOT CHANGE MANUALLY/', '$_PATH = "'.$_PATH.'"; // DO NOT CHANGE MANUALLY', file_get_contents('../functions.php'))
         );
 
-        copy('../images/default.jpg', '../../profile/avatar/default.jpg');
+        //copy('../images/default.jpg', '../../profile/avatar/default.jpg');
 
         header('Location: http://'.$_SERVER['HTTP_HOST'].$_PATH);
     }
