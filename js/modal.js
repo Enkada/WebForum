@@ -80,6 +80,7 @@ function showModalForm(action, extra = null) {
 
             var tbName = document.createElement('input');
             tbName.name = "name";
+            tbName.autofocus = true;
             tbName.placeholder = "Название категории";
             tbName.title = tbName.placeholder;
             tbName.required = true;
@@ -186,6 +187,7 @@ function showModalForm(action, extra = null) {
 
             var tbTitle = document.createElement('input');
             tbTitle.name = "title";
+            tbTitle.autofocus = true;
             tbTitle.placeholder = "Название раздела";
             tbTitle.title = tbTitle.placeholder;
             tbTitle.required = true;

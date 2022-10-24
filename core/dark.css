@@ -1,0 +1,17 @@
+:root {
+    --colorScheme: dark;
+
+    --clr-text-primary: hsl(0, 0%, 90%);
+    --clr-text-secondary: hsl(0, 0%, 60%);
+    --clr-text-tertiary: hsl(0, 0%, 15%);
+    --clr-text-quaternary: hsl(0, 0%, 5%);
+
+    --clr-brand-primary: hsl(171, 39%, 45%);
+    --clr-brand-lt: hsl(171, 39%, 65%);
+
+    --clr-editor: #286828;
+    --clr-warning: rgb(167, 0, 0);
+
+    --clr-bg: hsl(0, 0%, 7%);
+    --clr-bg-drk: hsl(0, 0%, 12%);
+}

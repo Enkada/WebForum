@@ -1,4 +1,5 @@
 :root {
+    --colorScheme: light;
     --fontFamily: system-ui, -apple-system, BlinkMacSystemFont, "SF UI Text", "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
     --contentWidth: 840px;
 
@@ -18,10 +19,10 @@
 }
 
 html {
-    //color-scheme: dark;
+    color-scheme: var(--colorScheme);
     font-family: var(--fontFamily);
     color: var(--clr-text-primary);
-    background-color: var(--clr-bg);
+    //background-color: var(--clr-bg);
 }
 
 body {
@@ -562,13 +563,51 @@ form {
 
 #topic-header-message {
     margin-bottom: 2em;
-    display: flex;
-    flex-direction: column;
-    gap: .25em;
+    display: grid;
+    grid-template-columns: min-content auto;
+    gap: 1em;
 
-    &__title {
-        font-weight: bold;
-        font-size: 1.5em;
+    &__author {
+        grid-column: 1;
+        grid-row: 1;
+        text-align: center;        
+
+        &__photo {
+            grid-column: 1;
+            grid-row: 1;
+            width: 96px;
+        }
+    }
+
+    &__content {
+        grid-column: 2;
+        grid-row: 1;
+
+        display: flex;
+        flex-direction: column;
+        gap: .25em;
+
+        &__date {
+            color: var(--clr-text-secondary);
+        }
+    
+        &__text {
+        }
+    
+        &__title {
+            height: fit-content;
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+    }
+
+    &__btn-reply {
+        grid-column: 1 / span 2;
+        grid-row: 2;
+    }
+
+    #form-add-reply {
+        grid-column: 1 / span 2;
     }
 }
 
@@ -639,6 +678,7 @@ form {
 
 .topic-hierarchy {
     display: flex;
+    margin-bottom: .5em;
 
     &__separator {
         color: var(--clr-text-tertiary);

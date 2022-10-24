@@ -160,16 +160,14 @@ function edit() {
     }
 }
 
-function profile() {
-    if ($_GET['id'] != '') {
-        include _CONNECTION_PATH;
+function get_user($id) {
+    include _CONNECTION_PATH;
         
-        $user = mysqli_fetch_assoc(mysqli_query($connection, sprintf("SELECT display_name, id, photo, (SELECT COUNT(*) FROM messages WHERE messages.user = users.id) as messages FROM users WHERE id = '%s'", 
-            mysqli_real_escape_string($connection, $_GET['id'])
-        )));
-    
-        return $user;
-    }
+    $user = mysqli_fetch_assoc(mysqli_query($connection, sprintf("SELECT display_name, id, photo, (SELECT COUNT(*) FROM messages WHERE messages.user = users.id) as messages FROM users WHERE id = '%s'", 
+        mysqli_real_escape_string($connection, $id)
+    )));
+
+    return $user;
 }
 
 function get_users_data() {
