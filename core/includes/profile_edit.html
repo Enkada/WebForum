@@ -2,9 +2,16 @@
     <label for="photo">Аватар</label>
     <div class="settings-form__image">
         <img src="<?=_PATH?>profile/avatar/<?= $_SESSION['photo'] ?>" id="image-preview" class="avatar">
-        <input type="button" value="Выбрать файл" onclick="document.getElementById('image-input').click()">
+        <input type="button" class="btn" value="Выбрать файл" onclick="document.getElementById('image-input').click()">
         <input type="file" name="photo" id="image-input" accept="image/*" onchange="showLogo(this)" hidden>        
     </div>   
     <button type="submit">Сохранить изменения</button>
+
+    <label for="photo">Оформление форума</label>
+    <div class="settings-form__btn-list">
+        <div class="btn-style" data-style="light">Светлый</div>
+        <div class="btn-style" data-style="dark">Темный</div>
+        <div class="btn-style" data-style="console">Консоль</div>
+    </div>
 </form>
 <script src="<?=_PATH?>js/settings.js"></script>

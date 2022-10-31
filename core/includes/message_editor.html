@@ -1,0 +1,25 @@
+<label for="text">Текст сообщения</label>
+<textarea name="text" id="message-text" rows="5" autofocus required>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores laboriosam itaque excepturi illo soluta aliquid exercitationem odit, at quasi dolor.</textarea>
+<div class="editor-btn-list">
+    <div class="editor-btn" data-tag="b" id="btn-bold">B</div>
+    <div class="editor-btn" data-tag="i" id="btn-itallic">I</div>
+    <div class="editor-btn" data-tag="s" id="btn-strike">S</div>
+    <div class="editor-btn" data-tag="u" id="btn-underline">U</div>
+</div>
+<script>
+const textarea = document.getElementById('message-text');
+
+document.querySelectorAll('.editor-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+    if (textarea.selectionStart != undefined) {
+        var startPos = textarea.selectionStart;
+        var endPos = textarea.selectionEnd;
+        var tag = btn.getAttribute('data-tag');
+        selectedText = textarea.value.substring(startPos, endPos);
+        textarea.value = textarea.value.slice(0, startPos) + `[${tag}]${selectedText}[/${tag}]` + textarea.value.slice(endPos);
+        textarea.focus();
+        textarea.setSelectionRange(startPos, endPos + 7);
+    }
+});
+});
+</script>

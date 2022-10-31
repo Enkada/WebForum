@@ -2,7 +2,7 @@
 session_start();
 
 // THIS VARIABLE IS EDITED BY SCRIPT
-$_PATH = "/WebForum/"; // DO NOT CHANGE MANUALLY
+$_PATH = "/forum/"; // DO NOT CHANGE MANUALLY
 
 define( '_PATH', $_PATH );
 define( '_CONNECTION_PATH', $_SERVER['DOCUMENT_ROOT'].$_PATH."core/connection.php" );
@@ -147,7 +147,7 @@ function edit() {
 
                 if (mysqli_query($connection, $query)) {
                     $previous_photo = $_SERVER['DOCUMENT_ROOT']._PATH."profile/avatar/".$_SESSION['photo'];
-                    if ($previous_photo != "default.jpg" && file_exists($previous_photo)) 
+                    if ($_SESSION['photo'] != "default.jpg" && file_exists($previous_photo)) 
                         unlink($previous_photo);
                     $_SESSION['photo'] = $file;
                     header('Location: '.$_SERVER['HTTP_REFERER']);

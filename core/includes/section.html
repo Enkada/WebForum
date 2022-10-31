@@ -10,8 +10,7 @@
     <input type="hidden" name="section" value="<?=$_SECTION_ID?>">
     <label for="title">Заголовок сообщения</label>
     <input type="text" name="title" required>
-    <label for="text">Текст сообщения</label>
-    <textarea name="text" rows="5" required></textarea>
+    <?php include "../core/includes/message_editor.html"?>
     <input type="submit" value="Создать тему">
 </form>
 <? endif; ?>

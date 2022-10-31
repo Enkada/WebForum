@@ -22,7 +22,7 @@ html {
     color-scheme: var(--colorScheme);
     font-family: var(--fontFamily);
     color: var(--clr-text-primary);
-    //background-color: var(--clr-bg);
+    background-color: var(--clr-bg);
 }
 
 body {
@@ -82,6 +82,7 @@ button, .btn, input[type="submit"] {
     background: var(--clr-text-tertiary);
     transition: background-color .5s ease;
     padding: .75em 1.5em;
+    color: var(--clr-text-primary);
 
     &:hover {
         background: var(--clr-brand-lt);
@@ -170,6 +171,15 @@ button, .btn, input[type="submit"] {
     border-radius: 4px;
 }
 
+.forum-footer {
+    margin-top: 2em;
+
+    &__content {
+        text-align: center;
+        color: var(--clr-text-tertiary);
+    }
+}
+
 .forum-header {
     margin: 2em auto;
     display: grid;    
@@ -177,9 +187,17 @@ button, .btn, input[type="submit"] {
     grid-template-columns: min-content auto min-content min-content;
     gap: 0 1em;
 
+    @media screen and (max-width: 430px) {
+        gap: 0;
+    }
+
     &__image {
         max-width: 3.5em;
         grid-column: 1;
+
+        @media screen and (max-width: 430px) {
+            display: none;
+        }
     }
 
     &__title {        
@@ -207,6 +225,10 @@ button, .btn, input[type="submit"] {
 
     &__navigation {
         grid-column: 3;
+
+        @media screen and (max-width: 430px) {
+            padding: 0 .5em;
+        }
 
         a {
             span:nth-child(2) {
@@ -240,10 +262,20 @@ button, .btn, input[type="submit"] {
         padding: .25em .5em;
         border-radius: 2em 0 0 2em;
 
+        @media screen and (max-width: 460px) {
+            border-radius: 0;
+            gap: 0;
+        }
+    
+
         &__photo {     
             display: flex;      
             grid-column: 1;
             grid-row: 1 / span 2;
+            
+            @media screen and (max-width: 460px) {
+                display: none;
+            }
 
             img {
                 width: 32px;
@@ -511,6 +543,45 @@ form {
         }
     }
 
+    &__btn-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1em;
+
+        .btn-style {
+            width: fit-content;
+            padding: 0.75em 1.5em;
+            border-radius: 2em;
+            border: 1px solid;
+            cursor: pointer;
+            user-select: none;
+            transition: opacity .5s ease;
+            font-family: sans-serif;
+
+            &:hover {
+                opacity: 0.6;
+            }
+
+            &[data-style="light"] {
+                background-color: #ffffff;
+                border-color: hsl(0, 0%, 85%);
+                color: black;
+            }
+            
+            &[data-style="dark"] {
+                background-color: hsl(0, 0%, 15%);
+                border-color: hsl(0, 0%, 40%);
+                color: hsl(0, 0%, 90%);
+            }
+
+            &[data-style="console"] {
+                background-color: black;
+                color: lime;
+                font-family: 'Courier New';
+            }
+        }
+    }
+
     button {
         grid-column: 2;
         width: fit-content;
@@ -719,4 +790,43 @@ form {
     border-left: 1px solid var(--clr-text-tertiary);
     padding-left: 16px;
     margin-left: 16px;
+}
+
+.editor-btn-list {
+    display: flex;
+    gap: .5em;
+
+    #btn-bold {
+        font-weight: bold;
+    }
+
+    #btn-itallic {
+        font-style: italic;
+        font-family: initial;
+    }
+
+    #btn-strike {
+        text-decoration: line-through;
+    }
+
+    #btn-underline {
+        text-decoration: underline;
+    }
+
+    .editor-btn {
+        cursor: pointer;
+        user-select: none;
+        aspect-ratio: 1 / 1;
+        display: flex;
+        width: 1.5em;
+        align-items: center;
+        justify-content: center;
+        line-height: 0;
+        background-color: var(--clr-text-quaternary);
+        border: 1px solid var(--clr-text-tertiary);
+
+        &:hover {
+            opacity: 0.6;
+        }
+    }
 }

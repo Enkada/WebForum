@@ -82,7 +82,7 @@ if (!empty($_POST)) {
 </head>
 <body>
     <header class="forum-header">
-        <img class="forum-header__image" src="../images/logo.png" alt="">
+        <img class="forum-header__image logo" src="../images/logo.png" alt="">
         <div class="forum-header__title">
             <a class="forum-header__title--main">xddBB</a>
             <div class="forum-header__title--sub">Установка</div>

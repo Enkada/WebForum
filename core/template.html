@@ -7,10 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?=$_TITLE?></title>
     <link rel="stylesheet" href="<?=$_PATH?>core/style.css">    
-    <? if ($_GET['dark'] == 1): ?>
-        <link rel="stylesheet" href="<?=$_PATH?>core/dark.css">
+    <? if (isset($_COOKIE["theme"]) && $_COOKIE["theme"] != "light"): ?>
+        <link rel="stylesheet" href="<?=$_PATH?>core/<?=$_COOKIE["theme"]?>.css">
     <? endif; ?>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="icon" type="image/png" href="<?=$_PATH?>/favicon.ico"/>
 </head>
 <body>
     <header class="forum-header">
@@ -41,7 +42,9 @@
         <? endif; ?>
     </header>
     <main class="forum-main <?=$_MAIN_CLASS?>"><?=$_CONTENT?></main>
-    <footer class="forum-footer"></footer>
+    <footer class="forum-footer">
+        <div class="forum-footer__content">© Хорев Кирилл, 2022</div>
+    </footer>
     <div id="id-service" data-id="<?= $_SESSION['id'] ?>"></div>
     <div id="path-service" data-path="<?= $_PATH ?>"></div>
     <div id="role-service" data-role="<?= $_SESSION['role'] ?>"></div>

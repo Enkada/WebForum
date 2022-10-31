@@ -19,6 +19,7 @@ html {
   color-scheme: var(--colorScheme);
   font-family: var(--fontFamily);
   color: var(--clr-text-primary);
+  background-color: var(--clr-bg);
 }
 
 body {
@@ -77,6 +78,7 @@ button, .btn, input[type=submit] {
   background: var(--clr-text-tertiary);
   transition: background-color 0.5s ease;
   padding: 0.75em 1.5em;
+  color: var(--clr-text-primary);
 }
 button:hover, .btn:hover, input[type=submit]:hover {
   background: var(--clr-brand-lt);
@@ -164,6 +166,14 @@ button:hover, .btn:hover, input[type=submit]:hover {
   border-radius: 4px;
 }
 
+.forum-footer {
+  margin-top: 2em;
+}
+.forum-footer__content {
+  text-align: center;
+  color: var(--clr-text-tertiary);
+}
+
 .forum-header {
   margin: 2em auto;
   display: grid;
@@ -172,9 +182,19 @@ button:hover, .btn:hover, input[type=submit]:hover {
   grid-template-columns: min-content auto min-content min-content;
   gap: 0 1em;
 }
+@media screen and (max-width: 430px) {
+  .forum-header {
+    gap: 0;
+  }
+}
 .forum-header__image {
   max-width: 3.5em;
   grid-column: 1;
+}
+@media screen and (max-width: 430px) {
+  .forum-header__image {
+    display: none;
+  }
 }
 .forum-header__title {
   grid-column: 2;
@@ -197,6 +217,11 @@ button:hover, .btn:hover, input[type=submit]:hover {
 }
 .forum-header__navigation {
   grid-column: 3;
+}
+@media screen and (max-width: 430px) {
+  .forum-header__navigation {
+    padding: 0 0.5em;
+  }
 }
 @media screen and (max-width: 640px) {
   .forum-header__navigation a span:nth-child(2) {
@@ -226,10 +251,21 @@ button:hover, .btn:hover, input[type=submit]:hover {
   padding: 0.25em 0.5em;
   border-radius: 2em 0 0 2em;
 }
+@media screen and (max-width: 460px) {
+  .forum-header__profile {
+    border-radius: 0;
+    gap: 0;
+  }
+}
 .forum-header__profile__photo {
   display: flex;
   grid-column: 1;
   grid-row: 1/span 2;
+}
+@media screen and (max-width: 460px) {
+  .forum-header__profile__photo {
+    display: none;
+  }
 }
 .forum-header__profile__photo img {
   width: 32px;
@@ -469,6 +505,44 @@ form + span {
   width: 48px;
   height: 48px;
 }
+.settings-form__btn-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+.settings-form__btn-list .btn-style {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 0.75em 1.5em;
+  border-radius: 2em;
+  border: 1px solid;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  transition: opacity 0.5s ease;
+  font-family: sans-serif;
+}
+.settings-form__btn-list .btn-style:hover {
+  opacity: 0.6;
+}
+.settings-form__btn-list .btn-style[data-style=light] {
+  background-color: #ffffff;
+  border-color: hsl(0deg, 0%, 85%);
+  color: black;
+}
+.settings-form__btn-list .btn-style[data-style=dark] {
+  background-color: hsl(0deg, 0%, 15%);
+  border-color: hsl(0deg, 0%, 40%);
+  color: hsl(0deg, 0%, 90%);
+}
+.settings-form__btn-list .btn-style[data-style=console] {
+  background-color: black;
+  color: lime;
+  font-family: "Courier New";
+}
 .settings-form button {
   grid-column: 2;
   width: -webkit-fit-content;
@@ -647,4 +721,40 @@ form + span {
   border-left: 1px solid var(--clr-text-tertiary);
   padding-left: 16px;
   margin-left: 16px;
+}
+
+.editor-btn-list {
+  display: flex;
+  gap: 0.5em;
+}
+.editor-btn-list #btn-bold {
+  font-weight: bold;
+}
+.editor-btn-list #btn-itallic {
+  font-style: italic;
+  font-family: initial;
+}
+.editor-btn-list #btn-strike {
+  text-decoration: line-through;
+}
+.editor-btn-list #btn-underline {
+  text-decoration: underline;
+}
+.editor-btn-list .editor-btn {
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  aspect-ratio: 1/1;
+  display: flex;
+  width: 1.5em;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+  background-color: var(--clr-text-quaternary);
+  border: 1px solid var(--clr-text-tertiary);
+}
+.editor-btn-list .editor-btn:hover {
+  opacity: 0.6;
 }/*# sourceMappingURL=style.css.map */

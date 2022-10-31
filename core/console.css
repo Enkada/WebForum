@@ -1,9 +1,11 @@
 :root {
     --colorScheme: dark;
 
-    --clr-text-primary: hsl(0, 0%, 90%);
+    --fontFamily: 'Courier New';
+
+    --clr-text-primary: hsl(128, 100%, 46%);
     --clr-text-secondary: hsl(0, 0%, 60%);
-    --clr-text-tertiary: hsl(0, 0%, 18%);
+    --clr-text-tertiary: hsl(0, 0%, 15%);
     --clr-text-quaternary: hsl(0, 0%, 5%);
 
     --clr-brand-primary: hsl(171, 39%, 45%);
@@ -12,6 +14,6 @@
     --clr-editor: #286828;
     --clr-warning: rgb(167, 0, 0);
 
-    --clr-bg: hsl(0, 0%, 7%);
-    --clr-bg-drk: hsl(0, 0%, 12%);
+    --clr-bg: hsl(0, 0%, 0%);
+    --clr-bg-drk: hsl(120, 6%, 12%);
 }
