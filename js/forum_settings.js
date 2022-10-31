@@ -4,6 +4,10 @@ var sections = [];
 var users = JSON.parse(document.getElementById('users-service').getAttribute('data-users'));
 console.log(users);
 
+const headerTitle = document.querySelector('.forum-header__title--main');
+const inputTitle = document.querySelector('input[name="forum_title"]');
+inputTitle.addEventListener("input", () => headerTitle.innerHTML = inputTitle.value );
+
 users.forEach(user => {
     var row = document.createElement('tr');
     //row.className = 'item';
@@ -19,8 +23,6 @@ users.forEach(user => {
     var email = document.createElement('td');
     email.innerHTML = user.email;
     row.appendChild(email);
-
-
 
     var activation = document.createElement('td');
     var btnActivation = document.createElement('span');
@@ -67,6 +69,7 @@ sorttable.makeSortable(userList);
 const forumList = document.querySelector('.forum-list');
 var showEditorTools = document.getElementById('role-service').getAttribute('data-role') == 'admin';
 
+// Request for list of forum sections
 (() => {    
     let httpRequest = new XMLHttpRequest();
   
@@ -76,16 +79,18 @@ var showEditorTools = document.getElementById('role-service').getAttribute('data
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
             if (httpRequest.status === 200) {
                 forumData = JSON.parse(httpRequest.responseText);
-                console.log(forumData);
+                console.log('forumData',forumData);
 
                 
                 forumData.map(({sections}) => ({sections})).forEach(array => {
+                    if (!array.sections)
+                        return;
                     array.sections.forEach(element => {
                         sections.push(element);
                     });
                 });
                 
-                console.log(sections);     
+                console.log('sections', sections);     
             }
           }
       };

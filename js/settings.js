@@ -1,4 +1,4 @@
-var preview = document.getElementById('avatar-preview');
+var preview = document.getElementById('image-preview');
 
 function showLogo(input) {
     if (input.files[0] != null) {

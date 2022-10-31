@@ -1,7 +1,13 @@
 <h2>Настройки форума</h2>
-<form action="../actions/post/edit_settings.php" method="POST" class="settings-form">
+<form action="../actions/post/edit_settings.php" method="POST" enctype="multipart/form-data" class="settings-form">
     <label for="title">Название форума</label>
-    <input type="text" name="forum_title" value="<?=$_SETTINGS["forum_title"]?>" required>
+    <input type="text" placeholder="Форум" title="Название форума" name="forum_title" value="<?=$_SETTINGS["forum_title"]?>" required>
+    <label for="logo">Логотип форума</label>
+    <div class="settings-form__image">
+        <img src="<?=_PATH?>core/images/logo.png?v=<?=rand(1,262144)?>" id="image-preview" class="logo">
+        <input type="button" value="Выбрать файл" onclick="document.getElementById('image-input').click()">
+        <input type="file" name="logo" id="image-input" accept="image/*" onchange="showLogo(this)" hidden>        
+    </div> 
     <button type="submit">Сохранить изменения</button>
 </form>
 <h2>Пользователи</h2>
@@ -16,3 +22,4 @@
 <div id="users-service" data-users="<?= htmlspecialchars(json_encode($_USERS_DATA)) ?>"></div>
 <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js" defer></script>
 <script src="<?=_PATH?>js/forum_settings.js" defer></script>
+<script src="<?=_PATH?>js/settings.js"></script>

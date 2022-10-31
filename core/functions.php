@@ -2,7 +2,7 @@
 session_start();
 
 // THIS VARIABLE IS EDITED BY SCRIPT
-$_PATH = "/forum/"; // DO NOT CHANGE MANUALLY
+$_PATH = "/WebForum/"; // DO NOT CHANGE MANUALLY
 
 define( '_PATH', $_PATH );
 define( '_CONNECTION_PATH', $_SERVER['DOCUMENT_ROOT'].$_PATH."core/connection.php" );
@@ -163,7 +163,7 @@ function edit() {
 function get_user($id) {
     include _CONNECTION_PATH;
         
-    $user = mysqli_fetch_assoc(mysqli_query($connection, sprintf("SELECT display_name, id, photo, (SELECT COUNT(*) FROM messages WHERE messages.user = users.id) as messages FROM users WHERE id = '%s'", 
+    $user = mysqli_fetch_assoc(mysqli_query($connection, sprintf("SELECT display_name, id, photo, (SELECT COUNT(*) FROM messages WHERE messages.user = users.id) as messages, registration_date FROM users WHERE id = '%s'", 
         mysqli_real_escape_string($connection, $id)
     )));
 

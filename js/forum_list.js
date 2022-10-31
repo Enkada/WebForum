@@ -13,9 +13,12 @@ var showEditorTools = document.getElementById('role-service').getAttribute('data
                 console.log(forumData);
                 var categories = forumData.map(({category: {id, name, priority}}) => ({id, name, priority}));
 
+                var index = 0;
                 forumData.forEach(item => {
                     var categoryRow = document.createElement('div');
                     categoryRow.className = 'category';
+
+                    categoryRow.style = '--index:' + index++;
 
                     var categoryRowTitle = document.createElement('div');
                     categoryRowTitle.className = 'category__title';

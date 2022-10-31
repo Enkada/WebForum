@@ -157,6 +157,13 @@ button:hover, .btn:hover, input[type=submit]:hover {
   margin: auto;
 }
 
+.logo {
+  aspect-ratio: 1/1;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 4px;
+}
+
 .forum-header {
   margin: 2em auto;
   display: grid;
@@ -260,6 +267,35 @@ button:hover, .btn:hover, input[type=submit]:hover {
   width: min(90vw, 260px);
 }
 
+@-webkit-keyframes fadeInAnimation {
+  0% {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+.category, .topic, .reply {
+  -webkit-animation: fadeInAnimation ease 1s forwards;
+          animation: fadeInAnimation ease 1s forwards;
+  -webkit-animation-delay: calc(var(--index) * 0.1s);
+          animation-delay: calc(var(--index) * 0.1s);
+  opacity: 0;
+}
+
 .forum-list {
   display: flex;
   flex-direction: column;
@@ -267,6 +303,11 @@ button:hover, .btn:hover, input[type=submit]:hover {
 }
 .forum-list .category {
   border: 1px solid var(--clr-text-tertiary);
+  -webkit-animation: fadeInAnimation ease 1s forwards;
+          animation: fadeInAnimation ease 1s forwards;
+  -webkit-animation-delay: calc(var(--index) * 0.1s);
+          animation-delay: calc(var(--index) * 0.1s);
+  opacity: 0;
 }
 .forum-list .category__title {
   font-size: 1.5em;
@@ -418,16 +459,15 @@ form + span {
   align-items: start;
   gap: 1em;
 }
-.settings-form__avatar {
+.settings-form__image {
   display: flex;
   align-items: center;
   gap: 1em;
   flex-wrap: wrap;
 }
-.settings-form__avatar #avatar-preview {
+.settings-form__image #image-preview {
   width: 48px;
   height: 48px;
-  border-radius: 50%;
 }
 .settings-form button {
   grid-column: 2;

@@ -164,6 +164,12 @@ button, .btn, input[type="submit"] {
     margin: auto;
 }
 
+.logo {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
 .forum-header {
     margin: 2em auto;
     display: grid;    
@@ -285,6 +291,23 @@ button, .btn, input[type="submit"] {
     }
 }
 
+@keyframes fadeInAnimation {
+    0% {
+        transform: translateY(10px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0px);
+        opacity: 1;
+     }
+}
+
+.category, .topic, .reply {
+    animation: fadeInAnimation ease 1s forwards;
+    animation-delay: calc(var(--index) * .1s);
+    opacity: 0;
+}
+
 .forum-list {
     display: flex;
     flex-direction: column;
@@ -292,7 +315,9 @@ button, .btn, input[type="submit"] {
 
     .category {
         border: 1px solid var(--clr-text-tertiary);
-        
+        animation: fadeInAnimation ease 1s forwards;
+        animation-delay: calc(var(--index) * .1s);
+        opacity: 0;
 
         &__title {
             font-size: 1.5em;
@@ -474,16 +499,15 @@ form {
     align-items: start;
     gap: 1em;
 
-    &__avatar {
+    &__image {
         display: flex;
         align-items: center;
         gap: 1em;
         flex-wrap: wrap;
 
-        #avatar-preview {
+        #image-preview {
             width: 48px;
             height: 48px;
-            border-radius: 50%;
         }
     }
 

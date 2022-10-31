@@ -6,6 +6,8 @@ const replyList = document.getElementById('topic-reply-list');
 const replyForm = document.getElementById('form-add-reply');
 const replyFormId = document.getElementById('form-add-reply__id');
 
+var index = 0;
+
 (() => {    
     let httpRequest = new XMLHttpRequest();
 
@@ -36,6 +38,8 @@ const replyFormId = document.getElementById('form-add-reply__id');
 function createReply(replyData) {
     var reply = document.createElement('div');
     reply.className = 'reply';   
+
+    reply.style = '--index:' + index++;
 
     var replyWrapper = document.createElement('div');
     replyWrapper.className = 'reply__wrapper';

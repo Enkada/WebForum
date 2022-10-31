@@ -19,9 +19,12 @@ const topicList = document.getElementById('topic-list');
                 if (topicsData == null)
                     return; 
                 
+                var index = 0;
                 topicsData.forEach(topic => {
                     var topicRow = document.createElement('div');
                     topicRow.className = 'topic';
+
+                    topicRow.style = '--index:' + index++;
 
                     var topicTitle = document.createElement('div');
                     topicTitle.className = 'topic__title';
