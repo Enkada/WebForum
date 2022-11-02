@@ -7,10 +7,15 @@
   --clr-text-secondary: hsl(0, 0%, 40%);
   --clr-text-tertiary: hsl(0, 0%, 85%);
   --clr-text-quaternary: hsl(0, 0%, 95%);
-  --clr-brand-primary: hsl(171, 39%, 45%);
-  --clr-brand-lt: hsl(171, 39%, 65%);
+  --brand-deg: 171;
+  --clr-brand-45: hsl(var(--brand-deg), 39%, 45%);
+  --clr-brand-55: hsl(var(--brand-deg), 39%, 55%);
+  --clr-brand-65: hsl(var(--brand-deg), 39%, 65%);
+  --clr-brand-75: hsl(var(--brand-deg), 39%, 75%);
   --clr-editor: green;
   --clr-warning: rgb(167, 0, 0);
+  --clr-yellow: rgb(236, 216, 28);
+  --clr-good: rgb(82, 136, 80);
   --clr-bg: #ffffff;
   --clr-bg-drk: #e9e9e9;
 }
@@ -37,10 +42,14 @@ body {
 
 a {
   text-decoration: none;
+  color: var(--clr-brand-45);
   transition: color 0.3s ease;
 }
 a:hover {
-  color: red !important;
+  color: var(--clr-brand-75) !important;
+}
+a:active {
+  color: var(--clr-brand-45) !important;
 }
 
 table {
@@ -60,28 +69,49 @@ table th {
   background-color: var(--clr-text-quaternary);
 }
 
-input, textarea {
+input:not([type=range], [type=button]), textarea {
   font-family: var(--fontFamily);
   padding: 0.5em 0.75em;
-  border: 1px solid var(--clr-text-tertiary);
+  border: 2px solid var(--clr-text-tertiary);
+  border-radius: 4px;
   outline: none;
 }
 
-:is(input[type=text], input[type=password], textarea):hover,
-:is(input[type=text], input[type=password], textarea):focus {
-  border: 1px solid var(--clr-brand-primary);
+:is(input, input[type=text], input[type=password], textarea):focus {
+  border-color: var(--clr-brand-45);
 }
 
 button, .btn, input[type=submit] {
   font-family: var(--fontFamily);
   border: none;
-  background: var(--clr-text-tertiary);
-  transition: background-color 0.5s ease;
+  background: var(--clr-brand-55);
+  transition: background-color 0.5s ease, box-shadow 0.1s ease, translate 0.1s ease;
   padding: 0.75em 1.5em;
-  color: var(--clr-text-primary);
+  color: var(--clr-bg);
+  box-shadow: 0px 2px 0px 0px var(--clr-brand-45);
+  border-radius: 4px;
+  font-weight: 500;
 }
 button:hover, .btn:hover, input[type=submit]:hover {
-  background: var(--clr-brand-lt);
+  background: var(--clr-brand-65);
+}
+button:active, .btn:active, input[type=submit]:active {
+  background: var(--clr-brand-55);
+  box-shadow: 0px 0px 0px 0px var(--clr-brand-45);
+  translate: 0 2px;
+}
+
+input[type=range] {
+  -webkit-appearance: none !important;
+  background-image: linear-gradient(90deg, hsl(0deg, 100%, 50%), hsl(40deg, 100%, 50%), hsl(80deg, 100%, 50%), hsl(120deg, 100%, 50%), hsl(160deg, 100%, 50%), hsl(200deg, 100%, 50%), hsl(240deg, 100%, 50%), hsl(280deg, 100%, 50%), hsl(320deg, 100%, 50%), hsl(0deg, 100%, 50%));
+  height: 1.5em;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none !important;
+  background: var(--clr-brand-45);
+  height: 1.5em;
+  width: 1.5em;
 }
 
 .btn-material-icon {
@@ -112,7 +142,7 @@ button:hover, .btn:hover, input[type=submit]:hover {
   color: var(--clr-warning);
 }
 .btn-material-icon:hover * {
-  color: red !important;
+  color: var(--clr-brand-45) !important;
 }
 .btn-material-icon--small span {
   color: var(--clr-text-tertiary) !important;
@@ -134,7 +164,7 @@ button:hover, .btn:hover, input[type=submit]:hover {
           user-select: none;
 }
 .material-icons:hover {
-  color: red !important;
+  color: var(--clr-brand-45) !important;
 }
 
 .avatar {
@@ -209,7 +239,7 @@ button:hover, .btn:hover, input[type=submit]:hover {
   transition: color 0.5s ease;
 }
 .forum-header__title--main:hover {
-  color: var(--clr-brand-lt);
+  color: var(--clr-brand-65);
 }
 .forum-header__title--sub {
   color: var(--clr-text-secondary);
@@ -302,6 +332,30 @@ button:hover, .btn:hover, input[type=submit]:hover {
 .forum-main--middle form {
   width: min(90vw, 260px);
 }
+.forum-main--middle form input:invalid:focus:not(:-moz-placeholder-shown) {
+  border: 2px solid var(--clr-yellow);
+}
+.forum-main--middle form input:invalid:focus:not(:-ms-input-placeholder) {
+  border: 2px solid var(--clr-yellow);
+}
+.forum-main--middle form input:invalid:focus:not(:placeholder-shown) {
+  border: 2px solid var(--clr-yellow);
+}
+.forum-main--middle form input:invalid:not(:-moz-placeholder-shown):not(:focus) {
+  border: 2px solid var(--clr-warning);
+  box-shadow: inset 0px 0px 20px 0px hsla(0deg, 100%, 50%, 0.15);
+}
+.forum-main--middle form input:invalid:not(:-ms-input-placeholder):not(:focus) {
+  border: 2px solid var(--clr-warning);
+  box-shadow: inset 0px 0px 20px 0px hsla(0deg, 100%, 50%, 0.15);
+}
+.forum-main--middle form input:invalid:not(:placeholder-shown):not(:focus) {
+  border: 2px solid var(--clr-warning);
+  box-shadow: inset 0px 0px 20px 0px hsla(0deg, 100%, 50%, 0.15);
+}
+.forum-main--middle form input:valid {
+  border: 2px solid var(--clr-good);
+}
 
 @-webkit-keyframes fadeInAnimation {
   0% {
@@ -339,6 +393,8 @@ button:hover, .btn:hover, input[type=submit]:hover {
 }
 .forum-list .category {
   border: 1px solid var(--clr-text-tertiary);
+  border-radius: 4px;
+  overflow: hidden;
   -webkit-animation: fadeInAnimation ease 1s forwards;
           animation: fadeInAnimation ease 1s forwards;
   -webkit-animation-delay: calc(var(--index) * 0.1s);
@@ -516,7 +572,7 @@ form + span {
   width: fit-content;
   padding: 0.75em 1.5em;
   border-radius: 2em;
-  border: 1px solid;
+  border: 2px solid;
   cursor: pointer;
   -webkit-user-select: none;
      -moz-user-select: none;

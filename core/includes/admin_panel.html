@@ -5,7 +5,7 @@
     <label for="logo">Логотип форума</label>
     <div class="settings-form__image">
         <img src="<?=_PATH?>core/images/logo.png?v=<?=rand(1,262144)?>" id="image-preview" class="logo">
-        <input type="button" value="Выбрать файл" onclick="document.getElementById('image-input').click()">
+        <input type="button" class="btn" value="Выбрать файл" onclick="document.getElementById('image-input').click()">
         <input type="file" name="logo" id="image-input" accept="image/*" onchange="showLogo(this)" hidden>        
     </div> 
     <button type="submit">Сохранить изменения</button>

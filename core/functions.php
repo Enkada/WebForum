@@ -2,7 +2,7 @@
 session_start();
 
 // THIS VARIABLE IS EDITED BY SCRIPT
-$_PATH = "/forum/"; // DO NOT CHANGE MANUALLY
+$_PATH = "/WebForum/"; // DO NOT CHANGE MANUALLY
 
 define( '_PATH', $_PATH );
 define( '_CONNECTION_PATH', $_SERVER['DOCUMENT_ROOT'].$_PATH."core/connection.php" );
