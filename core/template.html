@@ -1,6 +1,10 @@
 <?php session_start(); ?>
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru"
+<? if (isset($_COOKIE["accent"])): ?>
+    style="--brand-deg:<?=$_COOKIE["accent"]?>;"
+<? endif; ?>
+>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

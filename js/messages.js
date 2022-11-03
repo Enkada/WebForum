@@ -35,9 +35,11 @@ var index = 0;
     httpRequest.send();
 })();
 
+const topicDate = document.querySelector('#topic-header-message__content__date');
 const topicText = document.querySelector('#topic-header-message__content__text');
 window.onload = () => {
     topicText.innerHTML = formatMessage(topicText.innerHTML);
+    topicDate.innerHTML = getFormatTime(topicDate.innerHTML);
 };
 
 function createReply(replyData) {
@@ -138,99 +140,9 @@ function createReply(replyData) {
 const headerMessageBtnReply = document.getElementById('topic-header-message__btn-reply');
 const headerMessage = document.getElementById('topic-header-message');
 
-function getFormatTime(date) {
-    var diff = (Date.now() - Date.parse(date));
-    var s = Math.floor(diff / 1000);
-    var m = Math.floor(s / 60);
-    var h = Math.floor(m / 60);
-    var d = Math.floor(h / 24);
-
-    if (s == 0 && m == 0 && h == 0 && d == 0) {
-        return "только что";
-    }
-    else if (m == 0 && h == 0 && d == 0) {
-        return s + " сек. назад";
-    }
-    else if (h == 0 && d == 0) {
-        return m + " мин. назад";
-    }
-    else if (d == 0) {
-        return h + " ч. назад";
-    }
-    else if (d > 0) {
-        return d + " д. назад";
-    }
-
-    return date;
-}
-
 headerMessageBtnReply.addEventListener('click', () => {
     headerMessage.appendChild(replyForm);
     replyFormId.value = params.id;        
     replyForm.style.display = "";
     replyForm.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
 });
-
-var DateDiff = {
- 
-    inDays: function(d1, d2) {
-        var t2 = d2.getTime();
-        var t1 = d1.getTime();
- 
-        return Math.floor((t2-t1)/(24*3600*1000));
-    },
- 
-    inWeeks: function(d1, d2) {
-        var t2 = d2.getTime();
-        var t1 = d1.getTime();
- 
-        return parseInt((t2-t1)/(24*3600*1000*7));
-    },
- 
-    inMonths: function(d1, d2) {
-        var d1Y = d1.getFullYear();
-        var d2Y = d2.getFullYear();
-        var d1M = d1.getMonth();
-        var d2M = d2.getMonth();
- 
-        return (d2M+12*d2Y)-(d1M+12*d1Y);
-    },
- 
-    inYears: function(d1, d2) {
-        return d2.getFullYear()-d1.getFullYear();
-    }
-}
-
-const allowedTags = ['b', 'i', 's', 'u'];
-
-function formatMessage(t) {
-    allowedTags.forEach(tag => {
-        
-        var matches = t.matchAll(new RegExp(`\\[${tag}\\](.*?)\\[\/${tag}\\]`, "g"));
-        //var matches = t.matchAll(/\[(\w*?)\](.*?)\[\/\w*?\](?!\[)/g);
-        console.log(t);
-
-        if (matches != null) {  
-            for (const match of matches) {
-                // if (!allowedTags.includes(match[1]))
-                //     continue;
-                console.log(match);
-                t = t.replace(match[0], `<${tag}>${match[1]}</${tag}>`);
-            }
-        }
-    });
-    
-
-    return t;
-}
-
-String.prototype.escape = function() {
-    var tagsToReplace = {
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;'
-    };
-    return this.replace(/[&<>]/g, function(tag) {
-        return tagsToReplace[tag] || tag;
-    });
-};

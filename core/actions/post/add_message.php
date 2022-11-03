@@ -16,11 +16,22 @@ if (!empty($_POST)) {
     );    
 
     if (mysqli_query($connection, $query)) { 
+        if (!empty($_FILES)) {
+            $size = count($_FILES['attachments']['name']);
+    
+            for ($i = 0; $i < $size; $i++) { 
+                if ($_FILES['attachments']['error'][$i] == 0) {
+                    if (!move_uploaded_file($_FILES['attachments']['tmp_name'][$i], $_SERVER['DOCUMENT_ROOT'].$_PATH."uploads/". $_FILES['attachments']['name'][$i])) { 
+                        echo "error";
+                    }
+                }  
+            }
+        }
+
         header('Location: '.$_SERVER['HTTP_REFERER']);
     }
     else {
         echo mysqli_error($connection);
-        //header('Location: '.get_error_url($_SERVER['HTTP_REFERER'], 9));
     }
 
     mysqli_close($connection);  

@@ -15,6 +15,6 @@
     </div>
 
     <label for="accent">Акцентный цвет</label>
-    <input type="range" name="accent" min="0" max="360" id="range-accent">
+    <input type="range" name="accent" min="0" max="360" value="<?=isset($_COOKIE["accent"]) ? $_COOKIE["accent"] : 171 ?>" id="range-accent">
 </form>
 <script src="<?=_PATH?>js/settings.js"></script>

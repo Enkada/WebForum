@@ -15,20 +15,33 @@ function showLogo(input) {
 
 document.querySelectorAll('.btn-style').forEach(btn => {
     btn.addEventListener('click', () => {
-        var expires = "";
-        var date = new Date();
-        date.setTime(date.getTime() + (2147483647));
-        expires = "; expires=" + date.toUTCString();
-        document.cookie = 'theme' + "=" + (btn.getAttribute('data-style') || "")  + expires + "; path=/";
+        // var expires = "";
+        // var date = new Date();
+        // date.setTime(date.getTime() + (2147483647));
+        // expires = "; expires=" + date.toUTCString();
+        // document.cookie = 'theme' + "=" + (btn.getAttribute('data-style') || "")  + expires + "; path=/";
+        setCookie('theme', btn.getAttribute('data-style'));
 
         location.reload();
         return false;
     });
 });
 
+function setCookie(name,value) {
+    var expires = "";
+    var date = new Date();
+    date.setTime(date.getTime() + (2147483647));
+    expires = "; expires=" + date.toUTCString();
+    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+}
+
 const accent = document.querySelector('#range-accent');
 
 accent.addEventListener('input', () => {
     console.log(accent.value);
     document.documentElement.style.setProperty('--brand-deg', accent.value);
+});
+
+accent.addEventListener('change', () => {
+    setCookie('accent', accent.value)
 });

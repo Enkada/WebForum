@@ -46,7 +46,7 @@ const topicList = document.getElementById('topic-list');
 
                     var topicInfoDate = document.createElement('div');
                     topicInfoDate.className = 'topic__info__date';
-                    topicInfoDate.innerHTML = topic.date;
+                    topicInfoDate.innerHTML = getFormatTime(topic.date);
 
                     topicInfo.appendChild(topicInfoAuthor);
                     topicInfo.appendChild(topicInfoDate);

@@ -1,12 +1,13 @@
 <h2><?=$_SECTION_TITLE?></h2>
 <p><?=$_SECTION_DESCRIPTION?></p>
 
+<script src="<?=_PATH?>js/format.js"></script>
 <script src="<?=_PATH?>js/topics.js" defer></script>
 <div id="topic-list"></div>
 
 <? if ($_IS_USER): ?>
 <div id="btn-add-topic" class="btn-material-icon btn-material-icon--middle"><span class="material-icons">add_circle</span><span>Создать новую тему</span></div>
-<form id="form-new-topic" style="display: none" action="../core/actions/post/add_topic.php" method="post">
+<form id="form-new-topic" style="display: none" action="../core/actions/post/add_topic.php" enctype="multipart/form-data" method="post">
     <input type="hidden" name="section" value="<?=$_SECTION_ID?>">
     <label for="title">Заголовок сообщения</label>
     <input type="text" name="title" required>

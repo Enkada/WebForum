@@ -5,7 +5,12 @@
     <div class="editor-btn" data-tag="i" id="btn-itallic">I</div>
     <div class="editor-btn" data-tag="s" id="btn-strike">S</div>
     <div class="editor-btn" data-tag="u" id="btn-underline">U</div>
+
+    <div id="btn-attach" class="btn-material-icon btn-reply" onclick="document.getElementById('attachment-input').click()"><span class="material-icons">attach_file</span><span>Прикрепить</span></div>
 </div>
+<input type="file" name="attachments[]" multiple hidden>
+<input type="file" form="" id="attachment-input" onchange="addAttachment(this)" hidden>
+<div id="attachment-list"></div>
 <script>
 const textarea = document.getElementById('message-text');
 
@@ -22,4 +27,80 @@ document.querySelectorAll('.editor-btn').forEach(btn => {
     }
 });
 });
+
+// Attachments
+
+var files = [];
+
+const attachmentList = document.querySelector('#attachment-list');
+const realAttachmentList = document.querySelector('input[name="attachments[]"]');
+const btnAttach = document.querySelector('#btn-attach');
+const attachmentInput = document.getElementById('attachment-input');
+
+function addAttachment(input) {
+    if (input.files[0] != null && ['image', 'video', 'audio'].includes(input.files[0].type.split('/')[0])) {
+        var file = input.files[0];
+        files.push(file);
+        updateAttachments();
+    }    
+    else {
+        console.log("Wrong file type! - ", input.files[0].type.split('/')[0]);
+    }
+}
+
+function removeAttachment(file) {
+    files = files.filter(f => f !== file);
+    updateAttachments();
+}
+
+function createAttachment(file) {  
+    var attachment = document.createElement('div');
+
+    var btnDelete = document.createElement('span');
+    btnDelete.setAttribute('class', 'material-icons');
+    btnDelete.addEventListener('click', () => removeAttachment(file))
+    btnDelete.innerHTML = "delete";
+    attachment.append(btnDelete);
+    
+    if (file.type.split('/')[0] === 'image') {        
+        attachment.setAttribute('class', 'attachment--image');
+
+        setTimeout(function(){ 
+            attachment.style.backgroundImage = `url(${URL.createObjectURL(file)})`;
+        }, 0);     
+    }
+    else {
+        attachment.setAttribute('class', 'attachment--other');
+    }      
+
+    return attachment;
+}
+
+function updateAttachments() {
+    if (files.length >= 2) {
+        btnAttach.classList.add('disabled');
+        attachmentInput.disabled = true;
+        btnAttach.title = "Максимум 4 файла";
+    }
+    else {
+        btnAttach.classList.remove('disabled');
+        attachmentInput.disabled = false;
+        btnAttach.title = "";
+    }   
+
+    document.querySelectorAll('.attachment--image, .attachment--other').forEach(attachment => {
+        attachment.parentElement.removeChild(attachment);
+    });
+
+    files.forEach(file => {
+        attachmentList.append(createAttachment(file));
+    });
+
+    var dt = new DataTransfer();
+    files.forEach(file => {
+        dt.items.add(file);
+    });
+
+    realAttachmentList.files = dt.files;
+}
 </script>
