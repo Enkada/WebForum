@@ -21,7 +21,7 @@ if (!empty($_POST)) {
     
             for ($i = 0; $i < $size; $i++) { 
                 if ($_FILES['attachments']['error'][$i] == 0) {
-                    if (!move_uploaded_file($_FILES['attachments']['tmp_name'][$i], $_SERVER['DOCUMENT_ROOT'].$_PATH."uploads/". $_FILES['attachments']['name'][$i])) { 
+                    if (!move_uploaded_file($_FILES['attachments']['tmp_name'][$i], $_SERVER['DOCUMENT_ROOT'].$_PATH."uploads/".time().pathinfo($_FILES['attachments']['name'][$i], PATHINFO_EXTENSION))) { 
                         echo "error";
                     }
                 }  

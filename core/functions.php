@@ -186,7 +186,7 @@ function get_users_data() {
 function get_message($id) {
     include _CONNECTION_PATH;
 
-    $query = sprintf("SELECT id, title, user, (SELECT display_name FROM users WHERE id = user) as author, (SELECT photo FROM users WHERE id = user) as photo, text, date FROM messages WHERE id = %s", 
+    $query = sprintf("SELECT id, title, user, (SELECT display_name FROM users WHERE id = user) as author, (SELECT photo FROM users WHERE id = user) as photo, text, attachments, date FROM messages WHERE id = %s", 
         mysqli_real_escape_string($connection, $id)
     ); 
 
@@ -199,7 +199,7 @@ function get_message($id) {
 function get_replies($id) {
     include _CONNECTION_PATH;
 
-    $query = sprintf("SELECT id, title, user, (SELECT display_name FROM users WHERE id = user) as author, (SELECT photo FROM users WHERE id = user) as photo, text, date FROM messages WHERE reply_to = %s ORDER BY date DESC", 
+    $query = sprintf("SELECT id, title, user, (SELECT display_name FROM users WHERE id = user) as author, (SELECT photo FROM users WHERE id = user) as photo, text, attachments, date FROM messages WHERE reply_to = %s ORDER BY date DESC", 
         mysqli_real_escape_string($connection, $id)
     ); 
 

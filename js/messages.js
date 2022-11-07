@@ -79,6 +79,22 @@ function createReply(replyData) {
 
     replyWrapper.appendChild(replyHeader);
 
+    if (replyData.attachments) {
+        var replyAttachments = document.createElement('div');
+        replyAttachments.className = 'reply__attachment-list'; 
+        JSON.parse(replyData.attachments).forEach(attachment => {
+            attachmentImage = document.createElement('img');
+            attachmentImage.className = 'reply__attachment--image'; 
+            attachmentImage.src = '../uploads/' + attachment.real;
+            replyAttachments.appendChild(attachmentImage);
+
+            attachmentImage.addEventListener('click', () => {
+               openImageViewer('../uploads/' + attachment.real); 
+            });
+        });
+        replyWrapper.appendChild(replyAttachments);
+    }
+
     var replyText = document.createElement('div');
     replyText.className = 'reply__text'; 
     replyText.innerHTML = formatMessage(replyData.text.escape());
@@ -146,3 +162,40 @@ headerMessageBtnReply.addEventListener('click', () => {
     replyForm.style.display = "";
     replyForm.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
 });
+
+const imageViewer = document.getElementById('image-viewer');
+const selectedImage = document.getElementById('selected-image');
+var isLMBDown = false;
+
+imageViewer.addEventListener('mousedown', () => {
+    isLMBDown = true;
+});
+
+imageViewer.addEventListener('mouseup', () => {
+    isLMBDown = false;
+});
+
+var mouseX = 0;
+var mouseY = 0;
+var mouseXSpeed = 0;
+var mouseYSpeed = 0;
+var offsetX = 0;
+var offsetY = 0;
+
+imageViewer.addEventListener('mousemove', function(e) {
+    mouseXSpeed = e.screenX - mouseX;
+    mouseYSpeed = e.screenY - mouseY;
+    mouseX = e.screenX;
+    mouseY = e.screenY;
+
+    if (isLMBDown) {
+        offsetX += mouseXSpeed;
+        offsetY += mouseYSpeed;
+
+        imageViewer.style = `--offset-x: ${offsetX}px; --offset-y: ${offsetY}px;`;
+    }    
+});
+
+function openImageViewer(image) {
+    selectedImage.src = image;
+}

@@ -804,6 +804,19 @@ form {
         gap: .25em;
     }
 
+    &__attachment-list {
+        display: flex;
+        flex-wrap: wrap;
+        height: 120px;
+        gap: 1em;
+    }
+
+    &__attachment--image {
+        height: inherit;
+        border: 1px solid var(--clr-text-tertiary);
+        cursor: pointer;
+    }
+
     &__header {
         display: grid;
         grid-template-columns: min-content min-content auto;
@@ -958,11 +971,27 @@ form {
         &--other {
             display: flex;
             width: 100%;
-
-            & span {
-                cursor: pointer;
-            }
         }
+    }
+}
+
+#image-viewer {
+    --offset-x: 0px;
+    --offset-y: 0px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    translate: calc(-50% + var(--offset-x)) calc(-50% + var(--offset-y));
+    width: fit-content;
+    height: fit-content;
+    border: 4px solid var(--clr-text-secondary);
+
+    #selected-image {
+        max-width: 80vw;
+        max-height: 80vw;
+        margin-bottom: -4px;
+        pointer-events: none;
+        user-select: none;
     }
 }
 
