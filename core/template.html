@@ -25,13 +25,13 @@
             <div class="forum-header__title--sub"><?=$_TITLE?></div>
         </div>
         <nav class="forum-header__navigation">
-            <ul>            
+            <ul>                            
+                <li><a href="<?=$_PATH?>search/" class="btn-material-icon"><span class="material-icons">search</span><span>Поиск</span></a></li>
                 <? if ($_SESSION['user'] != ''): ?>
                     <li><a href="<?=$_PATH?>core/logout.php" class="btn-material-icon"><span class="material-icons">logout</span><span>Выход</span></a></li>
                 <? else: ?>
                     <li><a href="<?=$_PATH?>login.php" class="btn-material-icon"><span class="material-icons">login</span><span>Войти</span></a></li>
                 <? endif; ?>
-    
                 <? if ($_SESSION['role'] == 'admin'): ?>
                     <li><a href="<?=$_PATH?>core/admin/" class="btn-material-icon editor"><span class="material-icons">admin_panel_settings</span><span>Администрирование</span></a></li>
                 <? endif; ?>

@@ -27,10 +27,11 @@ function getFormatTime(date) {
 const allowedTags = ['b', 'i', 's', 'u'];
 
 function formatMessage(t) {
+	
+    console.log(t);
     allowedTags.forEach(tag => {
         
         var matches = t.matchAll(new RegExp(`\\[${tag}\\](.*?)\\[\/${tag}\\]`, "g"));
-        console.log(t);
 
         if (matches != null) {  
             for (const match of matches) {

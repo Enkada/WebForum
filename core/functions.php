@@ -196,6 +196,16 @@ function get_message($id) {
     return $msg;
 }
 
+function get_messages() {
+    include _CONNECTION_PATH;
+    $query = mysqli_query($connection, "SELECT id, title, user, reply_to, (SELECT display_name FROM users WHERE id = user) as author, (SELECT photo FROM users WHERE id = user) as photo, text, attachments, date FROM messages ORDER BY date DESC");
+
+    while ($row = mysqli_fetch_assoc($query)) {
+        $data[] = $row;
+    }
+    return $data;
+}
+
 function get_replies($id) {
     include _CONNECTION_PATH;
 

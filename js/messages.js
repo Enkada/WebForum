@@ -6,6 +6,8 @@ const replyList = document.getElementById('topic-reply-list');
 const replyForm = document.getElementById('form-add-reply');
 const replyFormId = document.getElementById('form-add-reply__id');
 
+var role = document.getElementById('role-service').getAttribute('data-role');
+
 var index = 0;
 
 (() => {    
@@ -79,7 +81,7 @@ function createReply(replyData) {
 
     replyWrapper.appendChild(replyHeader);
 
-    if (replyData.attachments) {
+    if (replyData.attachments != "[]") {
         var replyAttachments = document.createElement('div');
         replyAttachments.className = 'reply__attachment-list'; 
         JSON.parse(replyData.attachments).forEach(attachment => {
@@ -153,15 +155,18 @@ function createReply(replyData) {
     return reply;
 }
 
-const headerMessageBtnReply = document.getElementById('topic-header-message__btn-reply');
-const headerMessage = document.getElementById('topic-header-message');
+if (role) {
+    const headerMessageBtnReply = document.getElementById('topic-header-message__btn-reply');
+    const headerMessage = document.getElementById('topic-header-message');
+    
+    headerMessageBtnReply.addEventListener('click', () => {
+        headerMessage.appendChild(replyForm);
+        replyFormId.value = params.id;        
+        replyForm.style.display = "";
+        replyForm.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
+    });
+}
 
-headerMessageBtnReply.addEventListener('click', () => {
-    headerMessage.appendChild(replyForm);
-    replyFormId.value = params.id;        
-    replyForm.style.display = "";
-    replyForm.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
-});
 
 const imageViewer = document.getElementById('image-viewer');
 const selectedImage = document.getElementById('selected-image');
@@ -171,8 +176,12 @@ imageViewer.addEventListener('mousedown', () => {
     isLMBDown = true;
 });
 
-imageViewer.addEventListener('mouseup', () => {
+document.body.addEventListener('mouseup', () => {
     isLMBDown = false;
+});
+
+document.getElementById('btn-close-image').addEventListener('click', () => {
+    imageViewer.style.display = "none";
 });
 
 var mouseX = 0;
@@ -181,8 +190,24 @@ var mouseXSpeed = 0;
 var mouseYSpeed = 0;
 var offsetX = 0;
 var offsetY = 0;
+var scale = 1;
+var scrollY = 0;
 
-imageViewer.addEventListener('mousemove', function(e) {
+imageViewer.addEventListener('wheel', function(event)
+{
+    if (event.deltaY < 0)
+    {
+        scale += .2;
+    }
+    else if (event.deltaY > 0 && scale > .4)
+    {
+        scale -= .2;
+    }
+    imageViewer.style.setProperty('--scale', scale);
+    event.preventDefault();
+});
+
+document.body.addEventListener('mousemove', function(e) {
     mouseXSpeed = e.screenX - mouseX;
     mouseYSpeed = e.screenY - mouseY;
     mouseX = e.screenX;
@@ -192,10 +217,12 @@ imageViewer.addEventListener('mousemove', function(e) {
         offsetX += mouseXSpeed;
         offsetY += mouseYSpeed;
 
-        imageViewer.style = `--offset-x: ${offsetX}px; --offset-y: ${offsetY}px;`;
+        imageViewer.style.setProperty('--offset-x', offsetX + 'px');
+        imageViewer.style.setProperty('--offset-y', offsetY + 'px');
     }    
 });
 
 function openImageViewer(image) {
+    imageViewer.style.display = "block";
     selectedImage.src = image;
 }

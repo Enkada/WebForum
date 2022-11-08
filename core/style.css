@@ -437,6 +437,11 @@ input[type=range]::-webkit-slider-thumb {
   align-items: center;
   gap: 0 0.5em;
 }
+@media screen and (max-width: 440px) {
+  .forum-list .category .section-list__row {
+    padding: 0.5em 0;
+  }
+}
 .forum-list .category .section-list__row--no-topics {
   grid-template-columns: auto 50px;
 }
@@ -619,6 +624,9 @@ form + span {
   width: fit-content;
 }
 
+#user-list {
+  margin-bottom: 1em;
+}
 #user-list .user-activated, #user-list .user-not-activated {
   cursor: pointer;
 }
@@ -734,13 +742,13 @@ form + span {
 .reply__attachment-list {
   display: flex;
   flex-wrap: wrap;
-  height: 120px;
   gap: 1em;
 }
 .reply__attachment--image {
   height: inherit;
   border: 1px solid var(--clr-text-tertiary);
   cursor: pointer;
+  height: 120px;
 }
 .reply__header {
   display: grid;
@@ -850,8 +858,8 @@ form + span {
   margin-bottom: 0.5em;
 }
 #attachment-list .attachment--image {
-  height: 48px;
-  width: 96px;
+  height: 64px;
+  width: 64px;
   background-size: cover;
   background-position: center;
   border: 1px solid var(--clr-text-tertiary);
@@ -881,6 +889,7 @@ form + span {
 #image-viewer {
   --offset-x: 0px;
   --offset-y: 0px;
+  --scale: 1;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -892,6 +901,10 @@ form + span {
   height: -moz-fit-content;
   height: fit-content;
   border: 4px solid var(--clr-text-secondary);
+  scale: var(--scale);
+  -webkit-animation: scaleInAnimation ease 0.3s forwards;
+          animation: scaleInAnimation ease 0.3s forwards;
+  background-color: var(--clr-text-quaternary);
 }
 #image-viewer #selected-image {
   max-width: 80vw;
@@ -902,4 +915,45 @@ form + span {
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
+}
+#image-viewer #btn-close-image {
+  position: absolute;
+  right: -0.5em;
+  top: -0.5em;
+  color: var(--clr-bg);
+  background-color: var(--clr-text-secondary);
+  border-radius: 50%;
+  text-align: center;
+  padding: 4px;
+}
+
+@-webkit-keyframes scaleInAnimation {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes scaleInAnimation {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+#search-input {
+  width: -webkit-fill-available;
+  margin-bottom: 1em;
+}
+
+.search-result-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+.search-result-list .search-result__title {
+  font-weight: 500;
 }/*# sourceMappingURL=style.css.map */

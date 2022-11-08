@@ -458,7 +458,11 @@ input[type='range']::-webkit-slider-thumb {
             &__row {
                 padding: 1em 0;
                 display: grid;
-                grid-template-columns: auto 50px 200px;        
+                grid-template-columns: auto 50px 200px;     
+                
+                @media screen and (max-width: 440px) {
+                    padding: .5em 0;
+                }
                 
                 align-items: center;
                 gap: 0 .5em;
@@ -669,7 +673,8 @@ form {
     }    
 }
 
-#user-list {   
+#user-list {  
+    margin-bottom: 1em; 
 
     .user-activated, .user-not-activated {
         cursor: pointer;
@@ -807,14 +812,14 @@ form {
     &__attachment-list {
         display: flex;
         flex-wrap: wrap;
-        height: 120px;
         gap: 1em;
     }
 
     &__attachment--image {
         height: inherit;
         border: 1px solid var(--clr-text-tertiary);
-        cursor: pointer;
+        cursor: pointer;        
+        height: 120px;
     }
 
     &__header {
@@ -941,8 +946,8 @@ form {
     .attachment {
 
         &--image {
-            height: 48px;
-            width: 96px;
+            height: 64px;
+            width: 64px;
             background-size: cover;
             background-position: center;
             border: 1px solid var(--clr-text-tertiary);
@@ -978,6 +983,7 @@ form {
 #image-viewer {
     --offset-x: 0px;
     --offset-y: 0px;
+    --scale: 1;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -985,6 +991,9 @@ form {
     width: fit-content;
     height: fit-content;
     border: 4px solid var(--clr-text-secondary);
+    scale: var(--scale);
+    animation: scaleInAnimation ease .3s forwards;
+    background-color: var(--clr-text-quaternary);
 
     #selected-image {
         max-width: 80vw;
@@ -993,5 +1002,41 @@ form {
         pointer-events: none;
         user-select: none;
     }
+
+    #btn-close-image {
+        position: absolute;
+        right: -.5em;
+        top: -.5em;
+        color: var(--clr-bg);
+        background-color: var(--clr-text-secondary);
+        border-radius: 50%;
+        text-align: center;
+        padding: 4px;
+    }
 }
 
+@keyframes scaleInAnimation {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+     }
+}
+
+#search-input {
+    width: -webkit-fill-available;
+    margin-bottom: 1em;
+}
+
+.search-result-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+    .search-result {
+        &__title {
+            font-weight: 500;
+        }
+    }
+}
